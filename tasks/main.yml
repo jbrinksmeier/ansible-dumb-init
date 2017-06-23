@@ -2,7 +2,4 @@
 - name: download the dumb-init binary and mark it executable
   become: yes
   become_user: root
-  get_url: 
-    url: "{{dumb_init_download_url}}"
-    dest: "{{dumb_init_install_dir}}"
-    mode: 0755
+  command: 'wget -P {{dumb_init_install_dir}} {{dumb_init_download_url}}'
