@@ -1,5 +1,16 @@
 ---
-- name: download the dumb-init binary and mark it executable
+- name: Install wget
+  package:
+    name: wget
+    state: present
+    
+- name: Ensure install dir exists
+  file:
+    name: '{{dumb_init_install_parent_dir}}'
+    mode: 0755
+    state: directory
+
+- name: download the dumb-init
   become: yes
   become_user: root
-  command: 'wget -P {{dumb_init_install_parent_dir}} {{dumb_init_download_url}}'
+  command: '/usr/bin/wget -O {{dumb_init_install_dir}} {{dumb_init_download_url}}'
